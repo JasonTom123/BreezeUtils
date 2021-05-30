@@ -1,0 +1,13 @@
+res path mapping:
+    res/drawable -> r/a
+    res/layout -> r/b
+
+
+res id mapping:
+    brz.breeze.R.drawable.ic_launcher -> brz.breeze.R.drawable.a
+    brz.breeze.R.layout.activity_main -> brz.breeze.R.layout.a
+    brz.breeze.R.color.colorPrimary -> brz.breeze.R.color.a
+    brz.breeze.R.color.colorPrimaryDark -> brz.breeze.R.color.b
+    brz.breeze.R.color.colorAccent -> brz.breeze.R.color.c
+    brz.breeze.R.string.app_name -> brz.breeze.R.string.a
+    brz.breeze.R.style.AppTheme -> brz.breeze.R.style.a
