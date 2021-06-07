@@ -14,10 +14,14 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import android.app.Activity;
+import android.content.Intent;
 
 public class BFileUtils {
 
     public static final String TAG = "BFileUtils";
+	
+	public static final int CHOOSE_FILE_REQUEST = 100;
 
 	/**
 	 *@author BREEZE
@@ -188,7 +192,7 @@ public class BFileUtils {
 	}
 	
 
-	public static String getDataColumn(Context context, Uri uri, String selection,
+	private static String getDataColumn(Context context, Uri uri, String selection,
 									   String[] selectionArgs) {
 	    Cursor cursor = null;
 	    final String column = "_data";
@@ -215,7 +219,7 @@ public class BFileUtils {
 	 * @param uri The Uri to check.
 	 * @return Whether the Uri authority is ExternalStorageProvider.
 	 */
-	public static boolean isExternalStorageDocument(Uri uri) {
+	private static boolean isExternalStorageDocument(Uri uri) {
 	    return "com.android.externalstorage.documents".equals(uri.getAuthority());
 	}
 
@@ -223,7 +227,7 @@ public class BFileUtils {
 	 * @param uri The Uri to check.
 	 * @return Whether the Uri authority is DownloadsProvider.
 	 */
-	public static boolean isDownloadsDocument(Uri uri) {
+	private static boolean isDownloadsDocument(Uri uri) {
 	    return "com.android.providers.downloads.documents".equals(uri.getAuthority());
 	}
 
@@ -231,7 +235,7 @@ public class BFileUtils {
 	 * @param uri The Uri to check.
 	 * @return Whether the Uri authority is MediaProvider.
 	 */
-	public static boolean isMediaDocument(Uri uri) {
+	private static boolean isMediaDocument(Uri uri) {
 	    return "com.android.providers.media.documents".equals(uri.getAuthority());
 	}
 
@@ -239,7 +243,13 @@ public class BFileUtils {
 	 * @param uri The Uri to check.
 	 * @return Whether the Uri authority is Google Photos.
 	 */
-	public static boolean isGooglePhotosUri(Uri uri) {
+	private static boolean isGooglePhotosUri(Uri uri) {
 	    return "com.google.android.apps.photos.content".equals(uri.getAuthority());
+	}
+	
+	public static void chooseFile(Activity activity,String mimeType){
+		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+		intent.setType(mimeType);
+		activity.startActivityForResult(intent,CHOOSE_FILE_REQUEST);
 	}
 }
