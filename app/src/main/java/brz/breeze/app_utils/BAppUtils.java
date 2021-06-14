@@ -6,6 +6,11 @@ import java.io.File;
 import android.app.Application;
 import android.graphics.Typeface;
 import android.content.res.AssetManager;
+import java.io.InputStream;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
+import android.os.Handler;
+import android.os.Looper;
 
 public class BAppUtils {
     
@@ -89,6 +94,10 @@ public class BAppUtils {
         return isRoot;
 	}
 	
+	/**
+	*@author BREEZE
+	*@description 获取中文字体
+	*/
 	public static Typeface getChineseTypeface(Context context){
 		try{
 			AssetManager am = context.getAssets();
@@ -99,6 +108,10 @@ public class BAppUtils {
 		return Typeface.DEFAULT;
 	}
 	
+	/**
+	*@author BREEZE
+	*@description 获取英文字体
+	*/
 	public static Typeface getEnglishTypeface(Context context){
 		try{
 			AssetManager am = context.getAssets();
@@ -110,5 +123,38 @@ public class BAppUtils {
 	}
 	
 	public static Application mApplication;
+	
+	/**
+	*@author BREEZE
+	*@description 从Assets中取出文件
+	*/
+	public static InputStream getResFromAssets(Context context,String path){
+		try{
+			AssetManager as = context.getAssets();
+			return as.open(path);
+		}catch(Exception e){
+			return null;
+		}
+	}
+	
+	/**
+	*@author BREEZE
+	*@description 获取线程
+	*/
+	private static ExecutorService executorService;
+	private static Handler uiHandler;
+	public static void execute(Runnable runnable){
+		if(executorService==null){
+			executorService = Executors.newFixedThreadPool(5);
+		}
+		executorService.execute(runnable);
+	}
+	
+	public static void uiExecute(Runnable runnable){
+		if(uiHandler == null){
+			uiHandler = new Handler(Looper.getMainLooper());
+		}
+		uiHandler.post(runnable);
+	}
     
 }

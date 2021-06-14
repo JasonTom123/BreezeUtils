@@ -3,6 +3,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import android.support.v4.app.ActivityCompat;
+import android.content.pm.PackageManager;
+import android.app.Activity;
 
 public class BToolUtils {
     
@@ -39,6 +42,17 @@ public class BToolUtils {
 			week_day=0;
 		}
 		return weeks[week_day];
+	}
+	
+	/**
+	*@author BREEZE
+	*@description 权限申请
+	*/
+	public static final int REQUEST_PERMISSION_CODE = 1203;
+	public static void requestPermission(Activity context,String[] permissions){
+		if(permissions.length>0&&ActivityCompat.checkSelfPermission(context,permissions[0])!=PackageManager.PERMISSION_GRANTED){
+			ActivityCompat.requestPermissions(context,permissions,REQUEST_PERMISSION_CODE);
+		}
 	}
     
 }
